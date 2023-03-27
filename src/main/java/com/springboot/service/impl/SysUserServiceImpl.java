@@ -3,7 +3,7 @@ package com.springboot.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springboot.mapper.SysUserMapper;
-import com.springboot.pojo.SysUser;
+import com.springboot.entity.SysUser;
 import com.springboot.service.SysUserService;
 import com.springboot.common.BusinessException;
 import com.springboot.utils.PasswordEncryptionUtil;
@@ -12,8 +12,6 @@ import com.springboot.utils.TokenGenerator;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
 * @author 陈臣
@@ -79,8 +77,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser>
     }
 
     //用户注册信息
-    @Transactional //事务管理
     @Override
+    @Transactional //事务管理
     public boolean saveSysUser(SysUser sysUser) {
         //创建条件构造器
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();

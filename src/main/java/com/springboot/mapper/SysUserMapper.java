@@ -1,7 +1,7 @@
 package com.springboot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.springboot.pojo.SysUser;
+import com.springboot.entity.SysUser;
 
 /**
 * @author 陈臣

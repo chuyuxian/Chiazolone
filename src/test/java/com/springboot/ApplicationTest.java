@@ -1,18 +1,13 @@
 package com.springboot;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.springboot.mapper.SysUserMapper;
-import com.springboot.pojo.SysUser;
 import com.springboot.service.SysUserService;
 import com.springboot.utils.PasswordEncryptionUtil;
 import com.springboot.utils.SnowflakeIdGenerator;
-import org.apache.ibatis.annotations.Param;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 import java.util.UUID;
 
 public class ApplicationTest {

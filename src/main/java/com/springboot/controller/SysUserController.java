@@ -1,16 +1,18 @@
 package com.springboot.controller;
 
 import com.springboot.common.R;
-import com.springboot.pojo.SysUser;
+import com.springboot.entity.SysUser;
 import com.springboot.service.SysUserService;
 import com.springboot.common.BusinessException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * 用户登录管理控制类
@@ -24,7 +26,8 @@ public class SysUserController {
      * 已知Bug
      *   1、退出功能，退出了之后却没有清空token值
      *          这个还是因为MyBaits-Plus的默认设置的问题，在更新数据库的时候，如果有字段是null的情况下是自动忽略的，就是执行的SQL语句里面是没有这个字段名的
-     *      而我们设置的token就是null，导致在更新的时候没有token这个字段，所以无法进行token值的更新，只需要在属性名上面加上@TableField(updateStrategy = FieldStrategy.IGNORED) 标注即可
+     *      而我们设置的token就是null，导致在更新的时候没有token这个字段，所以无法进行token值的更新，
+     *      只需要在属性名上面加上@TableField(updateStrategy = FieldStrategy.IGNORED) 标注即可恢复使用
      *
      *   2、注册账号，登录时没有账号自动进行注册
      *      未实现，准备是在判断账号和密码哪里加入，
@@ -43,13 +46,11 @@ public class SysUserController {
 
 
     //使用构造器注入，比@Autowired好，一致性和完整性更好了,还可以避免空指针问题
-    //final 保证了值不会被修改，虽然加不加不了没关系，但是加上去更好
-    private final SysUserService sysUserService;
-    private final HttpSession session;
+    //final 保证了值不会被修改，虽然不加不也没关系，但是加上去会更好
+    private  SysUserService sysUserService;
 
-    public SysUserController(SysUserService sysUserService, HttpSession session) {
+    public SysUserController(SysUserService sysUserService) {
         this.sysUserService = sysUserService;
-        this.session = session;
     }
 
     /**
@@ -60,15 +61,18 @@ public class SysUserController {
      */
     @ApiOperation("登录接口")
     @PostMapping("/login")
-    public R<SysUser> login(String phone, String password) {
+    public R<SysUser> login(String phone, String password,HttpSession session,HttpServletResponse response) throws IOException {
         //从service中调用方法 根据手机号查询单个数据
         SysUser sysUserOne = sysUserService.getSysUserLogin(phone, password);
 
         //登录成功之后，将用户的id存入session中，以便接下来的操作
         session.setAttribute("sysUser_Id", sysUserOne.getId());
 
+        //跳转到首页
+        response.sendRedirect("/index.html");
         //将数据返回给前端
         return R.success(sysUserOne);
+
     }
 
     /**
@@ -77,10 +81,12 @@ public class SysUserController {
      */
     @ApiOperation("退出接口")
     @GetMapping("/logout")
-    private R<String> logout() {
+    private R<String> logout(HttpSession session) throws IOException {
         //查询用户的信息
-        String sysUser_id =(String) session.getAttribute("sysUser_Id");
-        SysUser sysUser = sysUserService.getSysUserById(sysUser_id);
+        String sysUser_Id =(String) session.getAttribute("sysUser_Id");
+        SysUser sysUser = sysUserService.getSysUserById(sysUser_Id);
+        //清除session的值
+        session.removeAttribute("sysUser_Id");
 
         //如果有值的话，清理session中的id和token
         if (sysUser != null) {
@@ -88,8 +94,8 @@ public class SysUserController {
             sysUser.setToken("");
             //调用service中 根据用户id进行修改信息
             sysUserService.updateSysUserById(sysUser);
-            //清除session的值
-            session.removeAttribute("sysUser_Id");
+            //跳传到登录页面
+//            response.sendRedirect("/login.html");
             //返回成功结果
             return R.success(sysUser.getName() + "退出登录成功");
         }
@@ -104,7 +110,7 @@ public class SysUserController {
      */
     @ApiOperation("注册接口")
     @PostMapping("/register")
-    private R<String> register(@RequestBody SysUser sysUser) {
+    private R<String> register(@RequestBody SysUser sysUser) throws IOException {
         //调用service中 用户注册信息
         boolean b = sysUserService.saveSysUser(sysUser);
         //进行判断，返回合适的结果

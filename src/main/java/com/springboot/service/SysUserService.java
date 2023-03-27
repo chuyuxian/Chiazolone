@@ -1,8 +1,7 @@
 package com.springboot.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.springboot.pojo.SysUser;
-import io.swagger.models.auth.In;
+import com.springboot.entity.SysUser;
 
 /**
 * @author 陈臣

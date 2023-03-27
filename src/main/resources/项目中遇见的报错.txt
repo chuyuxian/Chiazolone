@@ -1,5 +1,10 @@
+包的介绍
+    common：里面都是一些通用的方法
+    config：里面是一些配置，比如配置MyBaits的分页插件
+    filter：里面是拦截器
+    utils：里面都是一些工具类，有生成唯一id、生成token值、密码加密、knife4j测试后端接口
 依赖冲突
-    Druid 1.21之前尽量不要和mybatis-Plus3.1.1一起使用，日期格式会报错的
+    Druid 1.21之前不要和mybatis-Plus3.1.1一起使用，日期格式会报错的
 
 登录功能：SysUserController
     1、登录
@@ -10,4 +15,5 @@
         在设置token的值为null的时候，出现了SQL语句中没有token这个字符名，
        只需要在token属性中标注注解@TableField(updateStrategy = FieldStrategy.IGNORED)，忽略即可，
        或者是直接在配置文件中设置全局忽略，但是不建议,配置为：mybatis-plus.global-config.db-config.update-strategy=ignored
+
 

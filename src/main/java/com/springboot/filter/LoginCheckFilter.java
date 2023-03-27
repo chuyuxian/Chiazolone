@@ -1,7 +1,6 @@
 package com.springboot.filter;
 
 import com.springboot.common.BaseContext;
-import com.springboot.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 
@@ -23,6 +22,7 @@ public class LoginCheckFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        //创建request、response 以便后面的使用
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -33,17 +33,17 @@ public class LoginCheckFilter implements Filter {
 
         //定义不需要处理的请求路径,
         String[] urls = new String[]{
-                "/login.html",
-                "/register.html",
+                "/login.html",  //登录页面
+                "/register.html", //注册页面
                 "/css/**",
                 "/js/**",
                 "/img/**",
-                "/api/SysUser/**",
-                "/api/SysUser/register"
+                "/api/SysUser/login", //登录模块的所有请求
+                "/api/SysUser/register" //登录模块的注册接口
         };
 
         //2、判断本次请求是否需要处理
-        boolean check = check(urls, requestURI);
+        boolean check = check(urls,requestURI);
 
         //3、如果不需要处理直接放行
         if (check) {
@@ -51,20 +51,11 @@ public class LoginCheckFilter implements Filter {
             return;
         }
 
-        //4-1、判断后端系统员工用户登录状态，如果已登录，则直接放行
-        if (request.getSession().getAttribute("sysUser_Id") != null) {
+        //4、判断后端系统员工用户登录状态，如果已登录，则直接放行
+        String sysUser_id = (String) request.getSession().getAttribute("sysUser_Id");
+        if ( sysUser_id != null) {
 
             String empId =(String) request.getSession().getAttribute("sysUser_Id");
-            log.info("用户已登录，用户id为{}",empId);
-            BaseContext.setCurrentId(empId);
-
-            filterChain.doFilter(request,response);
-            return;
-        }
-        //4-2、判断前端用户登录状态，如果已登录，则直接放行
-        if (request.getSession().getAttribute("user") != null) {
-
-            String empId =(String) request.getSession().getAttribute("user");
             log.info("用户已登录，用户id为{}",empId);
             BaseContext.setCurrentId(empId);
 
@@ -75,14 +66,12 @@ public class LoginCheckFilter implements Filter {
         //5、如果未登录则返回登录页面,
         log.info("用户未登录");
         response.sendRedirect("/login.html");
-        return;
     }
 
     /**
      * 路径匹配，检查当前请求是否需要放行
      * @param urls
      * @param requestURI
-     * @return
      */
     public boolean check(String[] urls,String requestURI) {
         for (String url : urls) {
