@@ -1,0 +1,13 @@
+依赖冲突
+    Druid 1.21之前尽量不要和mybatis-Plus3.1.1一起使用，日期格式会报错的
+
+登录功能：SysUserController
+    1、登录
+        为什么要设置token的超时时间？
+            用户在无任何操作的时候进行注销，可以不浪费资源和性能。相反我们还需要一个刷新时间
+    2、注册
+    3、退出
+        在设置token的值为null的时候，出现了SQL语句中没有token这个字符名，
+       只需要在token属性中标注注解@TableField(updateStrategy = FieldStrategy.IGNORED)，忽略即可，
+       或者是直接在配置文件中设置全局忽略，但是不建议,配置为：mybatis-plus.global-config.db-config.update-strategy=ignored
+

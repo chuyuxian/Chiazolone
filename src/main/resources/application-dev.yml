@@ -1,0 +1,12 @@
+# 这个是专门设置连接数据库的配置文件
+spring:
+  datasource: # 配置数据库的设置
+    url: jdbc:mysql://localhost:3306/chiazolone?useSSL=false&useUnicode=true&characterEncoding=utf-8 # 连接数据库的URL
+    username: root # 连接数据的用户名
+    password: 123456 # 连接数据库的密码
+    driver-class-name: com.mysql.jdbc.Driver # 连接数据库的驱动
+    type: com.alibaba.druid.pool.DruidDataSource # 连接数据库的类型，这个是阿里的Druid
+    druid: # 连接池的具体设置
+      initial-size: 1 # 初始连接数量
+      min-idle: 1 # 空闲最小连接数据量
+      max-active: 20 # 最大活跃数量

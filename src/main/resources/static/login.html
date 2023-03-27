@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>乾清宫</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+        }
+        .container {
+            width:100%;
+            height: 100%;
+            background: url('./img/login_background.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #464646;
+        }
+        .login-wrapper {
+            background-color: #fff;
+            width: 358px;
+            height: 588px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .header {
+            font-size: 38px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 200px;
+        }
+        .input-item {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .btn {
+            border: none;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+            background-image: linear-gradient(to right, white, gray);
+            color: #fff;
+        }
+        .msg {
+            text-align: center;
+            line-height: 88px;
+        }
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="header">登录</div>
+            <form action="http://localhost:8800/api/SysUser/login" method="post">
+
+                <input type="hidden" name="method" value="login" />
+                <input type="text" name="phone" placeholder="手机号" class="input-item">
+                <input type="password" name="password" placeholder="密码" class="input-item">
+                <input type="submit" class="btn" value="登录"/>
+                <span v-modul="message"></span>
+
+            <div class="msg">
+                没有账户?
+                <a href="/register.html">登录</a>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

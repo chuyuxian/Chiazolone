@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ad0c4e912f.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <title>Music Shop</title>
+  </head>
+  <body class="w-100">
+    <header class="bg-my w-100">
+      <nav class="nav-bar ai-c jc-sb py-1 max-w-80 w-90">
+        <div class="nav--left ai-c">
+          <div class="nav__brand">
+            <div class="nav__brand__logo mr-2">
+              <img
+                class="nav__brand__logo__img"
+                src="img/waves-icon.png"
+                alt="waves-icon"
+              />
+            </div>
+            <div class="nav__brand__name">
+              <a class="brand-name--sm-w" href="https://ldelbel.github.io/music-store-website/">MUSIC</a>
+            </div>
+          </div>
+
+          <div class="nav__menu--short px-3 py-1 ai-c">
+            <div>
+              <a href="https://ldelbel.github.io/music-store-website/"><i class="fas fa-bars"></i></a>
+            </div>
+          </div>
+
+          <div class="nav__menu ai-c tupper">
+            <a class="nav__menu__item" href="index.html">
+              <div class="nav__menu__item co-l ai-c">
+                  <i class="fas"></i>
+                <div class="nav__menu_item-text">介&nbsp;绍</div>
+              </div>
+            </a>
+            
+            <a class="nav__menu__item" href="list.html">
+              <div class="nav__menu__item co-l ai-c">
+                <i class="fas"></i>
+                <div class="nav__menu_item-text">主&nbsp;页</div>
+              </div>
+            </a>
+            <a class="nav__menu__item" href="search.html">
+              <div class="nav__menu__item co-r ai-c">
+                  <i class="fas"></i>
+                <div class="nav__menu_item-text">音&nbsp;乐</div>
+              </div>
+            </a>
+            </div>
+
+        </div>
+        <div class="profile-icon d-none d-md-flex d-lg-none">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="nav--right ai-c d-none d-lg-flex h-100">
+          <div><a href="#"><img class="w-20 float-right" src="img/warehouse-icon.png"></a></div>
+          <div class="profile h-100 ai-c">
+            <div class="profile__name co-w mr-2 f-gb">游客</div>
+            <div class="profile__img h-100 ai-c">
+              <img class="h-100 round" src="img/face.jpeg" alt="face" />
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <header class="upper-page container-fluid bg-my2 py-3">
+      <img class="watermark" src="img/waves-icon.png" alt="wave-big" />
+      <div class="z-2 container max-w-80 w-90">
+        <div class="container flex-col">
+          <div class="brand-name--lg-w-page w-mc">MUSIC</div>
+          <h1 class="co-w f-hl w-mc">
+            您 的 音 乐 专 辑 买 卖 市 场
+          </h1>
+        </div>
+        <div class="search container-fluid ai-c jc-sb w-100">
+          <div class="search-top h-search ai-c">
+            <div
+              class="search__dropdown bg-white h-100 w-20 bord-r-red ai-c pl-1 pr-3 d-none d-md-flex"
+            >
+              <div class="search__dropdown-icon co-dt m-2">
+                <i class="fas fa-caret-down"></i>
+              </div>
+              <div class="search__dropdown-text co-dt f-gl">歌 曲</div>
+            </div>
+            <div
+              class="search__question bg-white h-100 bord-r-red co-l ai-c f-gl pl-2"
+            >
+              你在搜索什么？
+            </div>
+            <input
+              type="text"
+              placeholder="Search"
+              class="search__input h-100 co-l"
+            />
+          </div>
+          <div class="search-btn-div h-100">
+            <button type="button" class="search__button btn-dark w-100">
+              搜索
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="page-flex bg-lighter jc-c px-5">
+      <aside class="aside-flex py-3 d-none d-md-block">
+        <div class="aside__header ai-c">
+          <label class="container ai-c">
+            <input type="checkbox" />
+            <span class="ml-2 co-dt">周杰伦</span>
+          </label>
+          <label class="container ai-c">
+            <input type="checkbox" />
+            <span class="ml-2 co-dt">邓紫棋</span>
+          </label>
+        </div>
+        <div class="aside__block py-2">
+          <div class="aside__block__title ml-3 mb-3 pb-1 bord-b f-gb co-dt">
+            类型
+          </div>
+          <div class="aside__block__content">
+            <label class="container ai-c">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">民谣</span>
+            </label>
+            <label class="container ai-c">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">摇滚</span>
+            </label>
+            <label class="container ai-c">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">电子</span>
+            </label>
+          </div>
+        </div>
+      
+        <div class="aside__block py-2">
+          <div class="aside__block__title ml-3 mb-3 pb-1 bord-b f-gb co-dt">
+            价格
+          </div>
+          <div class="aside__block__content">
+            <label class="container ai-c">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">100￥ - 500￥</span>
+            </label>
+            <label class="container ai-c">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">501￥ - 1000￥</span>
+            </label>
+            <label class="container ai-c d-none d-md-block">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">1001￥ - 1500￥</span>
+            </label>
+            <label class="container ai-c d-none d-md-block">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">1501￥ - 2000￥</span>
+            </label>
+            <label class="container ai-c d-none d-md-block">
+              <input type="checkbox" />
+              <span class="ml-2 co-dt">2001￥ - 2500￥</span>
+            </label>
+          </div>
+        </div>
+      </aside>
+      <div>
+        <section class="results bg-lighter bord-x">
+          <div class="results__header">
+            <p class="results__header-p co-dt bord-b py-3 pl-3 m-0">
+              1 个 <b>"周杰伦"</b> 搜索结果
+
+            </p>
+          </div>
+
+          <div class="results__block bord-b mb-2">
+            <div class="container w-100 ai-c h-100 px-0">
+              <div class="results__main flex-col w-100 h-100 px-3">
+                <div class="results__main_content jc-sb">
+                  <div class="results__main_content-img"></div>
+                  <div class="results__main_content-info py-3 pl-3">
+                    <div class="jc-sb">
+                      <h5 class="co-dt f-hm mb-0 ai-c">
+                        以父之名
+                      </h5>
+                      <div class="plus--page co-l ai-c jc-c">+</div>
+                    </div>
+                    <p class="co-r f-gb mx-0">New</p>
+                    <p class="f-hl co-d">
+                      《以父之名》是周杰伦演唱的一首歌曲，由周杰伦作曲，黄俊郎填词，洪敬尧编曲，收录在周杰伦2003年7月31日发行的专辑《叶惠美》 [1]  中
+                    </p>
+                    <p class="co-d">
+                      <b>歌手:</b> <span class="co-l f-hl">周杰伦</span>
+                    </p>
+                    <p class="mb-0 co-d">
+                      <b>来自:</b>
+                      <span class="co-l f-hl">中国</span>
+                    </p>
+                    <div
+                      class="results__main_content-info-bottom ai-c mt-2 jc-sb"
+                    >
+                      <p class="co-l f-hm">09 Jun, 2020</p>
+                      <div>
+                        <button type="button" class="btn-red">
+                          ￥15
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <div class="page-selector"></div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+  </body>
+</html>
