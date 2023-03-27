@@ -26,6 +26,11 @@ public class LoginCheckFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        //用于禁止浏览器对响应内容进行缓存,但是这也是一个弊端，自动登录、免密登录都需要缓存的，但是现在自己无法解决
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //用于防止浏览器对响应内容进行缓存
+        response.setHeader("Expires", "0");
+
         log.info("拦截到请求：{}",request.getRequestURI());
 
         //1、获取本次请求的URL

@@ -81,7 +81,7 @@ public class SysUserController {
      */
     @ApiOperation("退出接口")
     @GetMapping("/logout")
-    private R<String> logout(HttpSession session) throws IOException {
+    private R<String> logout(HttpSession session,HttpServletResponse response) throws IOException {
         //查询用户的信息
         String sysUser_Id =(String) session.getAttribute("sysUser_Id");
         SysUser sysUser = sysUserService.getSysUserById(sysUser_Id);
@@ -95,7 +95,7 @@ public class SysUserController {
             //调用service中 根据用户id进行修改信息
             sysUserService.updateSysUserById(sysUser);
             //跳传到登录页面
-//            response.sendRedirect("/login.html");
+            response.sendRedirect("/login.html");
             //返回成功结果
             return R.success(sysUser.getName() + "退出登录成功");
         }
@@ -110,11 +110,13 @@ public class SysUserController {
      */
     @ApiOperation("注册接口")
     @PostMapping("/register")
-    private R<String> register(@RequestBody SysUser sysUser) throws IOException {
+    private R<String> register(@RequestBody SysUser sysUser,HttpServletResponse response) throws IOException {
         //调用service中 用户注册信息
         boolean b = sysUserService.saveSysUser(sysUser);
         //进行判断，返回合适的结果
         if (b) {
+            //跳传到登录页面
+            response.sendRedirect("/login.html");
             //返回成功结果
             return R.success("注册成功");
         }
