@@ -27,11 +27,9 @@ public class SysUserController {
      *      而我们设置的token就是null，导致在更新的时候没有token这个字段，所以无法进行token值的更新，只需要在属性名上面加上@TableField(updateStrategy = FieldStrategy.IGNORED) 标注即可
      *
      *   2、注册账号，登录时没有账号自动进行注册
-     *      未实现，准备是在判断账号和密码哪里加入，具体怎么弄，后面在自己想想
+     *      未实现，准备是在判断账号和密码哪里加入，
+     *          问题是，登录的时候将密码进行加密，然后自动注册的时候会将加密的密码再次进行加密操作,导致报错的
      *
-     */
-
-    /**
      * 已实现的功能
      *      1、登录
      *          token 新增值
@@ -43,14 +41,20 @@ public class SysUserController {
      *      4、拦截器
      */
 
-    @Autowired
-    private SysUserService sysUserService;
-    @Autowired
-    private HttpSession session;
+
+    //使用构造器注入，比@Autowired好，一致性和完整性更好了,还可以避免空指针问题
+    //final 保证了值不会被修改，虽然加不加不了没关系，但是加上去更好
+    private final SysUserService sysUserService;
+    private final HttpSession session;
+
+    public SysUserController(SysUserService sysUserService, HttpSession session) {
+        this.sysUserService = sysUserService;
+        this.session = session;
+    }
 
     /**
      * 登录接口
-     * @param phone    用户的手机号
+     * @param phone    用户的手机号（账号）
      * @param password 用户的密码
      * @return 返回登录结果
      */

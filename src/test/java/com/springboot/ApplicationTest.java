@@ -51,12 +51,12 @@ public class ApplicationTest {
     @Test
     public void test4() throws Exception {
         //加密
-        String password = PasswordEncryptionUtil.encryptPassword("1234567", null);
+//        String password = PasswordEncryptionUtil.encryptPassword("1234567", null);
         //pfwndlH4hV+oy9LtWuTt/Q==
-        System.out.println(password);
+//        System.out.println(password);
 
         //解密
-        String password1 = PasswordEncryptionUtil.decryptPassword(password, null);
+        String password1 = PasswordEncryptionUtil.decryptPassword("GyAAL/ICSLHXNDuBeRWnB5VtnYOjLEw1sKDdglGLD0w=", null);
         System.out.println(password1);
 
     }
